@@ -1,0 +1,26 @@
+<!-- recipes/recipe_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe List</title>
+</head>
+<body>
+    <h1>Recipe List</h1>
+    <a href="{% url 'add_recipe' %}">Add New Recipe</a>
+    <ul>
+        {% for recipe in recipes %}
+            <li>
+                <h2>{{ recipe.name }}</h2>
+                <p>{{ recipe.description }}</p>
+                {% if recipe.image %}
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" width="150">
+                {% endif %}
+                <a href="{% url 'edit_recipe' recipe.pk %}">Edit</a>
+                <a href="{% url 'delete_recipe' recipe.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
